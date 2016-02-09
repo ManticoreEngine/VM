@@ -1,0 +1,24 @@
+Registers:
+	proc - holds data about the last operation
+	sp   - stack pointer
+
+	-- acumulators --
+	A1   - 8 bit register
+	A2   - 16 bit register
+	A4   - 32 bit register
+	A8   - 64 bit register
+
+	N    - 8 bit register
+	M    - 8 bit register
+
+	A    - 16 bit register
+	B    - 16 bit register
+	C    - 16 bit register
+
+	T    - 32 bit register
+	U    - 32 bit register
+	V    - 32 bit register
+
+	X    - 64 bit register
+	Y    - 64 bit register
+	Z    - 64 bit register
