@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <vector>
+#include <stack>
 
 using std::vector;
 
@@ -61,5 +62,8 @@ public:
 
 	int place;
 	byte opcode;
+
+	bool graphical;
+	stack<byte> _stack;
 };
 #endif /* VM_H_ */

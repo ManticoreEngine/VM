@@ -36,6 +36,8 @@ VM::VM ()
 
 	place = 0;
 	opcode = 0x00;
+	graphical = false;
+	_stack = stack<byte> ();
 }
 
 VM::~VM ()
@@ -233,6 +235,17 @@ void VM::runCycle ()
 	case 0x36:
 		updateOpcode ();
 		loadMemory (opcode, C);
+		break;
+	case 0x37:
+		updateOpcode ();
+		proc.clearAll ();
+		proc.data = A.data - opcode;
+		break;
+	case 0x38:
+		if (proc.data == 0)
+		{
+
+		}
 		break;
 	default:
 		break;
