@@ -9,6 +9,24 @@ using namespace std;
 #include "nes.h"
 #include <thread>
 
+
+void parseHeader (vector<byte> codes, VM machine)
+{
+	if (codes[3] == 0x01)
+	{
+		machine.graphical = true;
+	}
+	else if (codes[3] == 0x00)
+	{
+		machine.graphical = false;
+	}
+	else
+	{
+		cout << "unspecified byte detected, binary ruined at 4th byte" << endl;
+		exit (EXIT_FAILURE);
+	}
+}
+
 string getType (string input)
 {
 	if (input[0] == 'N' and input[1] == 'E' and input[2] == 'S')
@@ -39,9 +57,13 @@ int main (int argc, char **args)
 
 	string type = getType (data);
 
+
+
 	vector<byte> newdata = vector<byte> ();
 	for (int i = 0; i < data.size (); i++)
+	{
 		newdata.push_back (data[i]);
+	}
 
 	if (type == "NES")
 	{
@@ -50,10 +72,18 @@ int main (int argc, char **args)
 	}
 	else if (type == "MVM")
 	{
-		vector<byte> newerdata = vector<byte> ();
-		for (int i = 16; i < newdata.size (); i++)
-			newerdata.push_back (newdata[i]);
-		machine.feed (newerdata);
+		vector<byte> header = vector<byte> ();
+		vector<byte> newdata = vector<byte> ();
+		for (int i = 0; i < data.size (); i++)
+		{
+			if (i < 16)
+				header.push_back(data[i]);
+			else
+				newdata.push_back (data[i]);
+		}
+		machine.feed (newdata);
+		parseHeader (header, machine);
+
 		while (machine.place < machine.parts.size ())
 		{
 			machine.runCycle ();
