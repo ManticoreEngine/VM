@@ -44,4 +44,6 @@ void transfer (Register32 a, Register32 b);
 void transfer (Register64 a, Register64 b);
 
 
+bool compare (byte a, byte b);
+
 #endif /* Register_H_ */

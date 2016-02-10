@@ -65,3 +65,12 @@ void transfer (Register64 a, Register64 b)
 	b.data = a.data;
 }
 
+
+bool compare (byte a, byte b)
+{
+	if (a == b)
+	{
+		return true;
+	}
+	return false;
+}
